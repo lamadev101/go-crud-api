@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:16 # Specify the PostgreSQL version
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: root      # Replace with your desired username
+      POSTGRES_PASSWORD: root@123  # Replace with your desired password
+      POSTGRES_DB: "crudl"        # Replace with your desired database name
+    ports:
+      - "5432:5432" # Map the PostgreSQL port to the host
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persistent storage for PostgreSQL data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Optional: Run an SQL file on startup
+
+volumes:
+  postgres_data:
+    driver: local
